@@ -7,7 +7,7 @@ import { SplashScreenPlugin } from '@capacitor/splash-screen'
 import { StatusBarPlugin } from '@capacitor/status-bar'
 import { FilePickerPlugin } from '@capawesome/capacitor-file-picker'
 
-import { EnvironmentPlugin, SaplingNativePlugin, SecurityUtilsPlugin } from '../src/app/capacitor-plugins/definitions'
+import { EnvironmentPlugin, SecurityUtilsPlugin } from '../src/app/capacitor-plugins/definitions'
 
 import { newSpy } from './unit-test-helper'
 
@@ -44,10 +44,6 @@ export function createSecurityUtilsSpy(): SecurityUtilsPlugin {
     'addListener',
     'waitForOverlayDismiss'
   ])
-}
-
-export function createSaplingSpy(): SaplingNativePlugin {
-  return jasmine.createSpyObj('SaplingPlugin', ['isSupported'])
 }
 
 export function createSplashScreenSpy(): SplashScreenPlugin {
@@ -92,10 +88,6 @@ export class AppInfoPluginMock {
 
 export class AppLauncherMock {
   public openUrl: jasmine.Spy = newSpy('openUrl', Promise.resolve())
-}
-
-export class SaplingPluginMock {
-  public isSupported: jasmine.Spy = newSpy('isSupported', Promise.resolve(false))
 }
 
 export class StatusBarMock {

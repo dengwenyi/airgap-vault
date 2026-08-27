@@ -28,7 +28,7 @@ import {
   ToastControllerMock,
   ZipMock
 } from './ionic-mocks'
-import { AppInfoPluginMock, AppLauncherMock, EnvironmentPluginMock, SaplingPluginMock, SplashScreenMock, StatusBarMock } from './plugins-mocks'
+import { AppInfoPluginMock, AppLauncherMock, EnvironmentPluginMock, SplashScreenMock, StatusBarMock } from './plugins-mocks'
 import { StorageMock } from './storage-mock'
 
 export class UnitHelper {
@@ -36,7 +36,6 @@ export class UnitHelper {
     appInfo: new AppInfoPluginMock(),
     appLauncher: new AppLauncherMock(),
     platform: new PlatformMock(),
-    sapling: new SaplingPluginMock(),
     statusBar: new StatusBarMock(),
     splashScreen: new SplashScreenMock(),
     deeplink: new DeeplinkMock(),

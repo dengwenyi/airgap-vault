@@ -52,7 +52,7 @@ export class DeserializedDetailEffects {
   )
 
   // FIXME [#210]:
-  // We can no longer execute the signing step as a single action due to Sapling heavy computational transaction signing
+  // We can no longer execute the signing step as a single action due to heavy computational transaction signing
   // https://gitlab.papers.tech/papers/airgap/airgap-vault/-/issues/210
 
   // public approved$ = createEffect(() =>

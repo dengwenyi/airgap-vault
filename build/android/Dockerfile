@@ -17,7 +17,7 @@ WORKDIR /app
 RUN yarn cache clean --force && yarn global add n && n 20
 
 # Install app dependencies, using wildcard if package-lock exists and copy capacitor configs and ionic configs
-COPY package.json yarn.lock apply-diagnostic-modules.js patch-dependency-versions.js fix-qrscanner-gradle.js capacitor.config.ts ionic.config.json copy-builtin-modules.js /app/
+COPY package.json yarn.lock apply-diagnostic-modules.js patch-dependency-versions.js fix-qrscanner-gradle.js capacitor.config.ts ionic.config.json /app/
 
 # install dependencies
 # run ionic android build

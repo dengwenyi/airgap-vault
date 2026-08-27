@@ -22,7 +22,6 @@ class ViewController: CAPBridgeViewController {
             bridge?.registerPluginInstance(Environment())
             bridge?.registerPluginInstance(Zip())
             bridge?.registerPluginInstance(IsolatedModules())
-            bridge?.registerPluginInstance(SaplingNative())
             bridge?.registerPluginInstance(SecurityUtils())
         }
     
