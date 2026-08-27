@@ -45,11 +45,6 @@
                 "output": "assets/symbols"
               },
               {
-                "glob": "airgap-coin-lib.js",
-                "input": "node_modules/@airgap/angular-core/src/assets/workers",
-                "output": "assets/workers"
-              },
-              {
                 "glob": "**/*.svg",
                 "input": "node_modules/ionicons/dist/ionicons/svg",
                 "output": "./svg"

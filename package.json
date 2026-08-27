@@ -23,7 +23,7 @@
     "lint-ci": "ng lint app --format json > ./lintReport.json || true",
     "lint-fix": "tslint --fix --project tsconfig.json",
     "e2e": "ng e2e",
-    "postinstall": "jetifier && node apply-diagnostic-modules.js && node patch-dependency-versions.js && node patch-angular-core-btc-only.js && node fix-qrscanner-gradle.js",
+    "postinstall": "jetifier && node apply-diagnostic-modules.js && node patch-dependency-versions.js && node patch-airgap-crypto-btc-only.js && node patch-angular-core-btc-only.js && node fix-qrscanner-gradle.js",
     "sonar-scanner": "sonar-scanner",
     "prettier": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "prepare-prod-build": "yarn configure-mangle",
