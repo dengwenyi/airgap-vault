@@ -354,9 +354,6 @@
     "title": "Recuperación Social",
     "text": "Teclea cada palabra en el orden correcto:"
   },
-  "isolated-module" : {
-    "text": "¿No puedes encontrar tu moneda favorita? Crea un Módulo Aislado para integrarla"
-  },
   "contact-book": {
     "label_add": "Agregar",
     "label_edit": "Editar",
@@ -666,7 +663,7 @@
     "text": "BIP85 te permite derivar de manera segura una nueva mnemónica a partir de tu mnemónica principal. Mientras tengas acceso a tu mnemónica principal, siempre podrás volver a generar tus mnemónicas hijas.",
     "mnemonic-length": "Longitud de la semilla",
     "index": "Indice",
-    "bip85-input-app-advance-mode":"Indice (0-2147483647)",
+    "bip85-input-app-advance-mode": "Indice (0-2147483647)",
     "generate": "Generar",
     "advanced_label": "Opciones Avanzadas",
     "bip39-passphrase": "Passphrase BIP-39",
@@ -766,8 +763,7 @@
         "message": "Se produjo un error al intentar borrar la aplicación. Si este error persiste, desinstale y elimine la aplicación de su dispositivo.",
         "ok": "Ok"
       }
-    },
-    "isolated-modules_label": "Módulos Aislados"
+    }
   },
   "secret-generate-dice-roll": {
     "title": "Lanzar dados",
@@ -805,58 +801,6 @@
     "shuffle": "Mezclar Teclas",
     "mask": "Mascarar Texto",
     "word_list": "Mostrar Lista de Palabras"
-  },
-  "isolated-modules": {
-    "loader_message": "Cargando..."
-  },
-  "isolated-modules-list-page": {
-    "title": "Módulos Aislados",
-    "items": {
-      "search_placeholder": "Buscar módulos aislados"
-    },
-    "alert": {
-      "add": {
-        "failed": {
-          "header": "Error al Agregar Módulo",
-          "message": "Algo salió mal. Por favor, inténtalo de nuevo.",
-          "ok_label": "Ok"
-        }
-      }
-    }
-  },
-  "isolated-modules-details-page": {
-    "button": {
-      "install_label": "Instalar",
-      "update_label": "Actualizar"
-    },
-    "popover": {
-      "remove_label": "Eliminar"
-    },
-    "alert": {
-      "remove": {
-        "header": "Quitar módulo",
-        "message": "¿Está seguro de que desea eliminar este módulo?",
-        "cancel_label": "Cancelar",
-        "proceed_label": "Eliminar"
-      },
-      "update": {
-        "generic": {
-          "header": "Error en la actualización del módulo",
-          "message": "¡Algo salió mal! El módulo no se pudo actualizar.",
-          "ok_label": "De acuerdo"
-        },
-        "load-failed": {
-          "header": "Error en la actualización del módulo",
-          "message": "¡Algo salió mal! No se pudo cargar el nuevo módulo.",
-          "ok_label": "De acuerdo"
-        },
-        "different-public-key": {
-          "header": "Error en la actualización del módulo",
-          "message": "No puedes actualizar este módulo con el paquete seleccionado, los autores (claves públicas) son diferentes.",
-          "ok_label": "De acuerdo"
-        }
-      }
-    }
   },
   "accounts-list-edit-popover": {
     "title": "Settings",

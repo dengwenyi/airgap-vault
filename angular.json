@@ -26,8 +26,28 @@
               },
               {
                 "glob": "**/*",
-                "input": "node_modules/@airgap/angular-core/src/assets",
-                "output": "assets"
+                "input": "node_modules/@airgap/angular-core/src/assets/i18n-common",
+                "output": "assets/i18n-common"
+              },
+              {
+                "glob": "identicon_placeholder.png",
+                "input": "node_modules/@airgap/angular-core/src/assets/img",
+                "output": "assets/img"
+              },
+              {
+                "glob": "btc.svg",
+                "input": "node_modules/@airgap/angular-core/src/assets/symbols",
+                "output": "assets/symbols"
+              },
+              {
+                "glob": "generic-coin.svg",
+                "input": "node_modules/@airgap/angular-core/src/assets/symbols",
+                "output": "assets/symbols"
+              },
+              {
+                "glob": "airgap-coin-lib.js",
+                "input": "node_modules/@airgap/angular-core/src/assets/workers",
+                "output": "assets/workers"
               },
               {
                 "glob": "**/*.svg",

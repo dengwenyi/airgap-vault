@@ -311,7 +311,7 @@
       "de": "German (AI translated)",
       "es": "Spanish (AI translated)",
       "ru": "Russian",
-      "fr":"French (AI translated)",
+      "fr": "French (AI translated)",
       "pt_BR": "Portuguese (Brazil)",
       "zh_CN": "Chinese (China)"
     },
@@ -353,9 +353,6 @@
   "social-recovery-validate-share": {
     "title": "Social Recovery",
     "text": "Tap each word to match the correct order:"
-  },
-  "isolated-module" : {
-    "text": "Can't find your favourite coin? Create an Isolated Module to integrate it"
   },
   "contact-book": {
     "label_add": "Add",
@@ -670,7 +667,7 @@
     "advanced_label": "Advanced Mode",
     "bip39-passphrase": "BIP-39 Passphrase",
     "bip39-passphrase-reveal": "Reveal Passphrase",
-    "bip85-input-app-advance-mode":"Index (0-2147483647)",
+    "bip85-input-app-advance-mode": "Index (0-2147483647)",
     "alert": {
       "header": "BIP-39 Passphrase",
       "message": "You set a BIP39 Passphrase. You will need to enter this passphrase again when you try to derive the same child key!",
@@ -766,8 +763,7 @@
         "message": "An error occured while trying to wipe the app. If this error persists, please uninstall and remove the app from your device.",
         "ok": "Ok"
       }
-    },
-    "isolated-modules_label": "Isolated Modules"
+    }
   },
   "secret-generate-dice-roll": {
     "title": "Dice Rolls",
@@ -805,58 +801,6 @@
     "shuffle": "Shuffle Keys",
     "mask": "Mask Text",
     "word_list": "Show Word List"
-  },
-  "isolated-modules": {
-    "loader_message": "Loading..."
-  },
-  "isolated-modules-list-page": {
-    "title": "Isolated Modules",
-    "items": {
-      "search_placeholder": "Search isolated modules"
-    },
-    "alert": {
-      "add": {
-        "failed": {
-          "header": "Add Module Failed",
-          "message": "Something went wrong! Please try again.",
-          "ok_label": "Ok"
-        }
-      }
-    }
-  },
-  "isolated-modules-details-page": {
-    "button": {
-      "install_label": "Install",
-      "update_label": "Update"
-    },
-    "popover": {
-      "remove_label": "Remove"
-    },
-    "alert": {
-      "remove": {
-        "header": "Remove Module",
-        "message": "Are you sure that you want to remove this module?",
-        "cancel_label": "Cancel",
-        "proceed_label": "Remove"
-      },
-      "update": {
-        "generic": {
-          "header": "Update Module Failed",
-          "message": "Something went wrong! The module couldn't be updated.",
-          "ok_label": "Ok"
-        },
-        "load-failed": {
-          "header": "Update Module Failed",
-          "message": "Something went wrong! The new module couldn't be loaded.",
-          "ok_label": "Ok"
-        },
-        "different-public-key": {
-          "header": "Update Module Failed",
-          "message": "You can't update this module with the selected package, the authors (public keys) are different.",
-          "ok_label": "Ok"
-        }
-      }
-    }
   },
   "accounts-list-edit-popover": {
     "title": "Settings",

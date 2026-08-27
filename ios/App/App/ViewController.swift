@@ -20,8 +20,6 @@ class ViewController: CAPBridgeViewController {
             bridge?.registerPluginInstance(AppInfo())
             bridge?.registerPluginInstance(CameraPreview())
             bridge?.registerPluginInstance(Environment())
-            bridge?.registerPluginInstance(Zip())
-            bridge?.registerPluginInstance(IsolatedModules())
             bridge?.registerPluginInstance(SecurityUtils())
         }
     

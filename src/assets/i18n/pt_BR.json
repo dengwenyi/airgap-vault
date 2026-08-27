@@ -311,7 +311,7 @@
       "de": "Alemão (IA traduzida)",
       "es": "Espanhol (IA traduzida)",
       "ru": "Ruso",
-      "fr":"francês (IA traduzida)",
+      "fr": "francês (IA traduzida)",
       "pt_BR": "Português (Brasil)",
       "zh_CN": "Chinês (China)"
     },
@@ -353,9 +353,6 @@
   "social-recovery-validate-share": {
     "title": "Recuperação Social",
     "text": "Toque em cada palavra para corresponder à ordem correta:"
-  },
-  "isolated-module" : {
-    "text": "Não consegue encontrar sua moeda favorita? Crie um Módulo Isolado para integrá-la"
   },
   "contact-book": {
     "label_add": "Adicionar",
@@ -666,7 +663,7 @@
     "text": "O BIP85 permite derivar com segurança um novo mnemônico do seu mnemônico principal. Contanto que você tenha acesso ao seu mnemônico principal, você sempre poderá gerar novamente os mnemônicos de seu filho.",
     "mnemonic-length": "Comprimento mnemônico",
     "index": "Índice",
-    "bip85-input-app-advance-mode":"Indice (0-2147483647)",
+    "bip85-input-app-advance-mode": "Indice (0-2147483647)",
     "generate": "Gerar",
     "advanced_label": "Modo avançado",
     "bip39-passphrase": "BIP-39 Passphrase",
@@ -766,8 +763,7 @@
         "message": "Ocorreu um erro ao tentar limpar o aplicativo. Se o erro persistir, desinstale e remova o aplicativo do seu dispositivo.",
         "ok": "Ok"
       }
-    },
-    "isolated-modules_label": "Módulos Aislados"
+    }
   },
   "secret-generate-dice-roll": {
     "title": "Jogadas de dados",
@@ -805,58 +801,6 @@
     "shuffle": "Embaralhar Teclas",
     "mask": "Mascarar Texto",
     "word_list": "Mostrar Lista de Palavras"
-  },
-  "isolated-modules": {
-    "loader_message": "Carregando..."
-  },
-  "isolated-modules-list-page": {
-    "title": "Módulos Isolados",
-    "items": {
-      "search_placeholder": "Buscar módulos isolados"
-    },
-    "alert": {
-      "add": {
-        "failed": {
-          "header": "Falha ao Adicionar Módulo",
-          "message": "Algo deu errado! Por favor, tente novamente.",
-          "ok_label": "Ok"
-        }
-      }
-    }
-  },
-  "isolated-modules-details-page": {
-    "button": {
-      "install_label": "Instalar",
-      "update_label": "Atualizar"
-    },
-    "popover": {
-      "remove_label": "Remover"
-    },
-    "alert": {
-      "remove": {
-        "header": "Remover Módulo",
-        "message": "Tem certeza de que deseja remover este módulo?",
-        "cancel_label": "Cancelar",
-        "proceed_label": "Remover"
-      },
-      "update": {
-        "generic": {
-          "header": "Falha no módulo de atualização",
-          "message": "Algo deu errado! O módulo não pôde ser atualizado.",
-          "ok_label": "OK"
-        },
-        "load-failed": {
-          "header": "Falha no módulo de atualização",
-          "message": "Algo deu errado! O novo módulo não pôde ser carregado.",
-          "ok_label": "OK"
-        },
-        "different-public-key": {
-          "header": "Falha no módulo de atualização",
-          "message": "Você não pode atualizar este módulo com o pacote selecionado, os autores (chaves públicas) são diferentes.",
-          "ok_label": "OK"
-        }
-      }
-    }
   },
   "accounts-list-edit-popover": {
     "title": "Configurações",

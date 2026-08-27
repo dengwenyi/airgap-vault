@@ -311,7 +311,7 @@
       "de": "德语 (人工智能翻译)",
       "es": "西班牙语 (人工智能翻译)",
       "ru": "俄语",
-      "fr":"法语 (人工智能翻译)",
+      "fr": "法语 (人工智能翻译)",
       "pt_BR": "葡萄牙语（巴西）",
       "zh_CN": "中文（中国）"
     },
@@ -353,9 +353,6 @@
   "social-recovery-validate-share": {
     "title": "社交恢复",
     "text": "点击每个单词以匹配正确的顺序："
-  },
-  "isolated-module" : {
-    "text": "找不到你喜欢的代币？创建一个独立模块来集成"
   },
   "contact-book": {
     "label_add": "添加",
@@ -666,7 +663,7 @@
     "text": "BIP85 允许您安全地从主助记词中派生出新助记词。只要您有权访问主助记词，您就始终能够重新生成子助记词。",
     "mnemonic-length": "助记符长度",
     "index": "指数",
-    "bip85-input-app-advance-mode":"指数 (0-2147483647)",
+    "bip85-input-app-advance-mode": "指数 (0-2147483647)",
     "generate": "生成",
     "advanced_label": "高级模式",
     "bip39-passphrase": "BIP-39 密码",
@@ -766,8 +763,7 @@
         "message": "尝试清除应用程序时出现错误。如果此错误仍然存在，请从您的设备中卸载并删除该应用程序。",
         "ok": "好的"
       }
-    },
-    "isolated-modules_label": "隔离模块"
+    }
   },
   "secret-generate-dice-roll": {
     "title": "掷骰子",
@@ -805,58 +801,6 @@
     "shuffle": "随机键",
     "mask": "遮罩文字",
     "word_list": "显示单词列表"
-  },
-  "isolated-modules": {
-    "loader_message": "加载中..."
-  },
-  "isolated-modules-list-page": {
-    "title": "隔离模块",
-    "items": {
-      "search_placeholder": "搜索隔离模块"
-    },
-    "alert": {
-      "add": {
-        "failed": {
-          "header": "添加模块失败",
-          "message": "出错了！请重试。",
-          "ok_label": "好的"
-        }
-      }
-    }
-  },
-  "isolated-modules-details-page": {
-    "button": {
-      "install_label": "安装",
-      "update_label": "更新"
-    },
-    "popover": {
-      "remove_label": "移除"
-    },
-    "alert": {
-      "remove": {
-        "header": "移除模块",
-        "message": "您确实要移除该模块吗？",
-        "cancel_label": "取消",
-        "proceed_label": "移除"
-      },
-      "update": {
-        "generic": {
-          "header": "更新模块失败",
-          "message": "出错了！无法更新模块。",
-          "ok_label": "好的"
-        },
-        "load-failed": {
-          "header": "更新模块失败",
-          "message": "出错了！无法加载新模块。",
-          "ok_label": "好的"
-        },
-        "different-public-key": {
-          "header": "更新模块失败",
-          "message": "您无法使用所选包更新此模块，作者（公钥）不同。",
-          "ok_label": "好的"
-        }
-      }
-    }
   },
   "accounts-list-edit-popover": {
     "title": "设置",

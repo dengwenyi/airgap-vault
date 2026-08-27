@@ -354,9 +354,6 @@
       "title": "Récupération sociale",
       "text": "Appuyez sur chaque mot pour qu'il corresponde au bon ordre :"
     },
-    "isolated-module" : {
-      "text": "Vous ne trouvez pas votre pièce préférée ? Créer un module isolé pour l'intégrer"
-    },
     "contact-book": {
       "label_add": "Ajouter",
       "label_edit": "Modifier",
@@ -766,8 +763,7 @@
           "message": "Une erreur s'est produite lors de la tentative d'effacement de l'application. Si cette erreur persiste, veuillez désinstaller et supprimer l'application de votre appareil.",
           "ok": "D'accord"
         }
-      },
-      "isolated-modules_label": "Modules isolés"
+      }
     },
     "secret-generate-dice-roll": {
       "title": "Lancements de dés",
@@ -805,58 +801,6 @@
       "shuffle": "Mélanger les touches",
       "mask": "Texte du masque",
       "word_list": "Afficher la liste de mots"
-    },
-    "isolated-modules": {
-      "loader_message": "Chargement..."
-    },
-    "isolated-modules-list-page": {
-      "title": "Modules isolés",
-      "items": {
-        "search_placeholder": "Rechercher des modules isolés"
-      },
-      "alert": {
-        "add": {
-          "failed": {
-            "header": "Échec de l'ajout d'un module",
-            "message": "Quelque chose s'est mal passé ! Veuillez réessayer.",
-            "ok_label": "D'accord"
-          }
-        }
-      }
-    },
-    "isolated-modules-details-page": {
-      "button": {
-        "install_label": "Installer",
-        "update_label": "Mise à jour"
-      },
-      "popover": {
-        "remove_label": "Retirer"
-      },
-      "alert": {
-        "remove": {
-          "header": "Supprimer le module",
-          "message": "Êtes-vous sûr de vouloir supprimer ce module ?",
-          "cancel_label": "Annuler",
-          "proceed_label": "Retirer"
-        },
-        "update": {
-          "generic": {
-            "header": "Échec de la mise à jour du module",
-            "message": "Quelque chose s'est mal passé ! Le module n'a pas pu être mis à jour.",
-            "ok_label": "D'accord"
-          },
-          "load-failed": {
-            "header": "Échec de la mise à jour du module",
-            "message": "Quelque chose s'est mal passé ! Le nouveau module n'a pas pu être chargé.",
-            "ok_label": "D'accord"
-          },
-          "different-public-key": {
-            "header": "Échec de la mise à jour du module",
-            "message": "Vous ne pouvez pas mettre à jour ce module avec le package sélectionné, les auteurs (clés publiques) sont différents.",
-            "ok_label": "D'accord"
-          }
-        }
-      }
     },
     "accounts-list-edit-popover": {
       "title": "Paramètres",

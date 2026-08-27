@@ -311,7 +311,7 @@
       "de": "German (KI übersetzt)",
       "es": "Spanish (KI übersetzt)",
       "ru": "Russisch",
-      "fr":"französisch (KI übersetzt)",
+      "fr": "französisch (KI übersetzt)",
       "pt_BR": "Portuguese (Brazil)",
       "zh_CN": "Chinese (China)"
     },
@@ -353,9 +353,6 @@
   "social-recovery-validate-share": {
     "title": "Soziale Wiederherstellung",
     "text": "Ordnen Sie die Wörter in die richtige Reihenfolge, indem Sie jeweils das betreffende Wort anwählen."
-  },
-  "isolated-module" : {
-    "text": "Sie können Ihre Lieblingsmünze nicht finden? Erstellen Sie ein isoliertes Modul, um sie zu integrieren"
   },
   "contact-book": {
     "label_add": "Hinzufügen",
@@ -666,7 +663,7 @@
     "text": "BIP85 allows you to securely derive a new mnemonic out of your main mnemonic. As long as you have access to your main mnemonic, you will always be able to re-generate your child mnemonics.",
     "mnemonic-length": "Mnemonic Length",
     "index": "Index",
-    "bip85-input-app-advance-mode":"Index (0-2147483647)",
+    "bip85-input-app-advance-mode": "Index (0-2147483647)",
     "generate": "Generate",
     "advanced_label": "Advanced Mode",
     "bip39-passphrase": "BIP-39 Passphrase",
@@ -766,8 +763,7 @@
         "message": "An error occured while trying to wipe the app. If this error persists, please uninstall and remove the app from your device.",
         "ok": "Ok"
       }
-    },
-    "isolated-modules_label": "Isolierte Module"
+    }
   },
   "secret-generate-dice-roll": {
     "title": "Dice Rolls",
@@ -805,58 +801,6 @@
     "shuffle": "Shuffle-Tasten",
     "mask": "Maskentext",
     "word_list": "Wortliste anzeigen"
-  },
-  "isolated-modules": {
-    "loader_message": "Wird geladen..."
-  },
-  "isolated-modules-list-page": {
-    "title": "Isolierte Module",
-    "items": {
-      "search_placeholder": "Suche nach isolierten Modulen"
-    },
-    "alert": {
-      "add": {
-        "failed": {
-          "header": "Hinzufügen des Moduls fehlgeschlagen",
-          "message": "Etwas ist schief gelaufen. Bitte versuche es erneut.",
-          "ok_label": "OK"
-        }
-      }
-    }
-  },
-  "isolated-modules-details-page": {
-    "button": {
-      "install_label": "Installieren",
-      "update_label": "Aktualisieren"
-    },
-    "popover": {
-      "remove_label": "Entfernen"
-    },
-    "alert": {
-      "remove": {
-        "header": "Modul entfernen",
-        "message": "Möchten Sie dieses Modul wirklich entfernen?",
-        "cancel_label": "Stornieren",
-        "proceed_label": "Entfernen"
-      },
-      "update": {
-        "generic": {
-          "header": "Modulaktualisierung fehlgeschlagen",
-          "message": "Etwas ist schiefgelaufen! Das Modul konnte nicht aktualisiert werden.",
-          "ok_label": "OK"
-        },
-        "load-failed": {
-          "header": "Modulaktualisierung fehlgeschlagen",
-          "message": "Es ist ein Fehler aufgetreten! Das neue Modul konnte nicht geladen werden.",
-          "ok_label": "OK"
-        },
-        "different-public-key": {
-          "header": "Modulaktualisierung fehlgeschlagen",
-          "message": "Sie können dieses Modul mit dem ausgewählten Paket nicht aktualisieren, da die Autoren (öffentliche Schlüssel) unterschiedlich sind.",
-          "ok_label": "OK"
-        }
-      }
-    }
   },
   "accounts-list-edit-popover": {
     "title": "Einstellungen",

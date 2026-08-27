@@ -19,7 +19,6 @@
 		"FilesystemPlugin",
 		"SplashScreenPlugin",
 		"StatusBarPlugin",
-		"FilePickerPlugin",
 		"CDVPlugin"
 	]
 }

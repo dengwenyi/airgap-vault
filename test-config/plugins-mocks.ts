@@ -5,7 +5,6 @@ import { ClipboardPlugin } from '@capacitor/clipboard'
 import { FilesystemPlugin } from '@capacitor/filesystem'
 import { SplashScreenPlugin } from '@capacitor/splash-screen'
 import { StatusBarPlugin } from '@capacitor/status-bar'
-import { FilePickerPlugin } from '@capawesome/capacitor-file-picker'
 
 import { EnvironmentPlugin, SecurityUtilsPlugin } from '../src/app/capacitor-plugins/definitions'
 
@@ -68,10 +67,6 @@ export function createIsolatedModulesSpy(): IsolatedModulesPlugin {
 
 export function createEnvironmentSpy(): EnvironmentPlugin {
   return jasmine.createSpyObj('EnvironmentPlugin', ['addListener'])
-}
-
-export function createFilePickerSpy(): FilePickerPlugin {
-  return jasmine.createSpyObj('FilePickerPlugin', ['pickFiles'])
 }
 
 export class AppInfoPluginMock {

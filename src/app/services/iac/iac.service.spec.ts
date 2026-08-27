@@ -3,7 +3,8 @@ import { TestBed } from '@angular/core/testing'
 import { IACService } from './iac.service'
 
 import { UnitHelper } from '../../../../test-config/unit-test-helper'
-import { STATUS_BAR_PLUGIN, SPLASH_SCREEN_PLUGIN, APP_PLUGIN, CLIPBOARD_PLUGIN, ISOLATED_MODULES_PLUGIN, WebIsolatedModules, FILESYSTEM_PLUGIN, ZIP_PLUGIN } from '@airgap/angular-core'
+import { STATUS_BAR_PLUGIN, SPLASH_SCREEN_PLUGIN, APP_PLUGIN, CLIPBOARD_PLUGIN, ISOLATED_MODULES_PLUGIN, FILESYSTEM_PLUGIN, ZIP_PLUGIN } from '@airgap/angular-core'
+import { bitcoinOnlyIsolatedModules } from '../../capacitor-plugins/bitcoin-only-plugins'
 import { ModalController, NavController, NavParams, Platform } from '@ionic/angular'
 import {
   ClipboardMock,
@@ -46,7 +47,7 @@ describe('IACService', () => {
           { provide: SPLASH_SCREEN_PLUGIN, useClass: SplashScreenMock },
           { provide: CLIPBOARD_PLUGIN, useClass: ClipboardMock },
           { provide: Platform, useClass: PlatformMock },
-          { provide: ISOLATED_MODULES_PLUGIN, useValue: new WebIsolatedModules() },
+          { provide: ISOLATED_MODULES_PLUGIN, useValue: bitcoinOnlyIsolatedModules },
           { provide: FILESYSTEM_PLUGIN, useClass: FilesystemMock },
           { provide: ZIP_PLUGIN, useClass: ZipMock }
         ]

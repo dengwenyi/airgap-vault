@@ -49,31 +49,6 @@ const nunchukwallet = {
   qrType: QRType.BC_UR
 }
 
-const metamask = {
-  icon: 'metamask.webp',
-  name: 'MetaMask',
-  qrType: QRType.METAMASK
-}
-
-const imtoken = {
-  icon: 'imtoken-wallet.svg',
-  name: 'imToken',
-  qrType: QRType.METAMASK
-}
-
-const rabby = {
-  icon: 'rabby-wallet.svg',
-  name: 'Rabby',
-  qrType: QRType.METAMASK
-}
-
-export const superherowallet = {
-  icon: 'superhero-wallet.png',
-  name: 'Superhero Wallet',
-  qrType: QRType.V3,
-  urlScheme: 'superhero'
-}
-
 export interface CompanionApp {
   icon: string
   name: string
@@ -96,8 +71,6 @@ export class AccountAddressPage {
   public secret: MnemonicSecret
 
   public syncOptions: CompanionApp[]
-
-  public showMetaMaskMigrationOnboarding: boolean = false
 
   public isAppAdvancedMode$: Observable<boolean> = this.storageService
     .subscribe(VaultStorageKey.ADVANCED_MODE_TYPE)
@@ -152,21 +125,6 @@ export class AccountAddressPage {
         case MainProtocolSymbols.BTC_TAPROOT:
           this.syncOptions = [airgapwallet, sparrowwallet]
           break
-        case MainProtocolSymbols.ETH:
-        case MainProtocolSymbols.OPTIMISM:
-        case MainProtocolSymbols.BNB:
-        case MainProtocolSymbols.BASE:
-          this.syncOptions = [airgapwallet]
-          if (this.wallet.isExtendedPublicKey) {
-            this.syncOptions.push(metamask, imtoken, rabby)
-          } else {
-            this.showMetaMaskMigrationOnboarding = true
-          }
-          break
-        case MainProtocolSymbols.AE:
-          this.syncOptions = [airgapwallet, superherowallet]
-          break
-
         default:
           this.syncOptions = [airgapwallet]
       }

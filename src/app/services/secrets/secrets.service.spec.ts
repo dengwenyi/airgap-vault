@@ -1,4 +1,5 @@
-import { FILESYSTEM_PLUGIN, ISOLATED_MODULES_PLUGIN, WebIsolatedModules, ZIP_PLUGIN } from '@airgap/angular-core'
+import { FILESYSTEM_PLUGIN, ISOLATED_MODULES_PLUGIN, ZIP_PLUGIN } from '@airgap/angular-core'
+import { bitcoinOnlyIsolatedModules } from '../../capacitor-plugins/bitcoin-only-plugins'
 import { TestBed } from '@angular/core/testing'
 import { FilesystemMock, ZipMock } from 'test-config/ionic-mocks'
 import { StorageMock } from 'test-config/storage-mock'
@@ -23,7 +24,7 @@ describe('SecretsService', () => {
           SecretsService,
           { provide: VaultStorageService, useClass: StorageMock },
           { provide: SecureStorageService, useClass: SecureStorageServiceMock },
-          { provide: ISOLATED_MODULES_PLUGIN, useValue: new WebIsolatedModules() },
+          { provide: ISOLATED_MODULES_PLUGIN, useValue: bitcoinOnlyIsolatedModules },
           { provide: FILESYSTEM_PLUGIN, useClass: FilesystemMock },
           { provide: ZIP_PLUGIN, useClass: ZipMock }
         ]

@@ -17,18 +17,13 @@ import {
   FILESYSTEM_PLUGIN,
   UiEventService,
   ISOLATED_MODULES_PLUGIN,
-  Zip,
   ZIP_PLUGIN,
   BaseModulesService,
-  BaseEnvironmentService,
-  isolatedModules
+  BaseEnvironmentService
 } from '@airgap/angular-core'
 import {
   AirGapAngularNgRxModule,
-  currencySymbolNgRxFacade,
-  isolatedModulesDetailsNgRxFacade,
-  isolatedModulesListNgRxFacade,
-  isolatedModulesListPageNgRxFacade
+  currencySymbolNgRxFacade
 } from '@airgap/angular-ngrx'
 import { PercentPipe } from '@angular/common'
 import { HttpClient, HttpClientModule } from '@angular/common/http'
@@ -40,7 +35,6 @@ import { AppLauncher } from '@capacitor/app-launcher'
 import { Clipboard } from '@capacitor/clipboard'
 import { SplashScreen } from '@capacitor/splash-screen'
 import { StatusBar } from '@capacitor/status-bar'
-import { FilePicker } from '@capawesome/capacitor-file-picker'
 import { DeviceMotion } from '@ionic-native/device-motion/ngx'
 import { Diagnostic } from '@ionic-native/diagnostic/ngx'
 import { IonicModule, IonicRouteStrategy, Platform } from '@ionic/angular'
@@ -58,9 +52,9 @@ import { CameraPreview, Environment, SecurityUtils } from './capacitor-plugins/d
 import {
   CAMERA_PREVIEW_PLUGIN,
   ENVIRONMENT_PLUGIN,
-  FILE_PICKER_PLUGIN,
   SECURITY_UTILS_PLUGIN
 } from './capacitor-plugins/injection-tokens'
+import { bitcoinOnlyIsolatedModules, bitcoinOnlyZip } from './capacitor-plugins/bitcoin-only-plugins'
 import { appConfig } from './config/app-config'
 import { DistributionOnboardingPageModule } from './pages/distribution-onboarding/distribution-onboarding.module'
 import { IntroductionPageModule } from './pages/introduction/introduction.module'
@@ -131,10 +125,7 @@ export function createTranslateLoader(http: HttpClient): AirGapTranslateLoader {
     LocalAuthenticationOnboardingPageModule,
     AirGapAngularCoreModule.forRoot({
       factories: {
-        currencySymbolFacade: currencySymbolNgRxFacade,
-        isolatedModulesDetailsFacade: isolatedModulesDetailsNgRxFacade,
-        isolatedModulesListFacade: isolatedModulesListNgRxFacade,
-        isolatedModulesListPageFacade: isolatedModulesListPageNgRxFacade
+        currencySymbolFacade: currencySymbolNgRxFacade
       }
     }),
     AirGapAngularNgRxModule
@@ -150,9 +141,8 @@ export function createTranslateLoader(http: HttpClient): AirGapTranslateLoader {
     { provide: SPLASH_SCREEN_PLUGIN, useValue: SplashScreen },
     { provide: STATUS_BAR_PLUGIN, useValue: StatusBar },
     { provide: APP_CONFIG, useValue: appConfig },
-    { provide: ZIP_PLUGIN, useValue: Zip },
-    { provide: FILE_PICKER_PLUGIN, useValue: FilePicker },
-    { provide: ISOLATED_MODULES_PLUGIN, useFactory: isolatedModules, deps: [Platform] },
+    { provide: ZIP_PLUGIN, useValue: bitcoinOnlyZip },
+    { provide: ISOLATED_MODULES_PLUGIN, useValue: bitcoinOnlyIsolatedModules },
     { provide: ENVIRONMENT_PLUGIN, useValue: Environment },
     { provide: ErrorHandler, useClass: ErrorHandlerService },
     { provide: BaseModulesService, useClass: VaultModulesService },

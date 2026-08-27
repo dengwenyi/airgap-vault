@@ -14,11 +14,8 @@ PODS:
     - Capacitor
   - CapacitorStatusBar (6.0.0):
     - Capacitor
-  - CapawesomeCapacitorFilePicker (0.5.10):
-    - Capacitor
   - CordovaPlugins (6.1.1):
     - CapacitorCordova
-  - ZIPFoundation (0.9.16)
 
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
@@ -29,13 +26,7 @@ DEPENDENCIES:
   - "CapacitorFilesystem (from `../../node_modules/@capacitor/filesystem`)"
   - "CapacitorSplashScreen (from `../../node_modules/@capacitor/splash-screen`)"
   - "CapacitorStatusBar (from `../../node_modules/@capacitor/status-bar`)"
-  - "CapawesomeCapacitorFilePicker (from `../../node_modules/@capawesome/capacitor-file-picker`)"
   - CordovaPlugins (from `../capacitor-cordova-ios-plugins`)
-  - ZIPFoundation (~> 0.9)
-
-SPEC REPOS:
-  trunk:
-    - ZIPFoundation
 
 EXTERNAL SOURCES:
   Capacitor:
@@ -54,8 +45,6 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/splash-screen"
   CapacitorStatusBar:
     :path: "../../node_modules/@capacitor/status-bar"
-  CapawesomeCapacitorFilePicker:
-    :path: "../../node_modules/@capawesome/capacitor-file-picker"
   CordovaPlugins:
     :path: "../capacitor-cordova-ios-plugins"
 
@@ -68,10 +57,6 @@ SPEC CHECKSUMS:
   CapacitorFilesystem: 9c2cc1e89d3b8b91503b316e9f6c2915c9bf9419
   CapacitorSplashScreen: d2d8fe9541d7bebdf735839b89edf6e762cea969
   CapacitorStatusBar: 129c68650d3f950e080e8e7e03d69c3b361dbe52
-  CapawesomeCapacitorFilePicker: 2674b1aa1915b69786783236abeff82c36f1a381
   CordovaPlugins: 4fc317d85bce41b61f649759129e329d756e33ee
-  ZIPFoundation: d170fa8e270b2a32bef9dcdcabff5b8f1a5deced
-
-PODFILE CHECKSUM: 51db8af4d6f01d50e8e2a9025e652f730fdb53af
 
 COCOAPODS: 1.16.2

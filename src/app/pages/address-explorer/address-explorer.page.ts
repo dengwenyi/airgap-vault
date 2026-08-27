@@ -1,4 +1,4 @@
-import { AirGapMarketWallet, MainProtocolSymbols } from '@airgap/coinlib-core'
+import { AirGapMarketWallet } from '@airgap/coinlib-core'
 import { Component, OnInit } from '@angular/core'
 import { NavigationService } from 'src/app/services/navigation/navigation.service'
 import { BIP32Factory } from 'bip32'
@@ -61,10 +61,6 @@ export class AddressExplorerPage implements OnInit {
       // this.fingerprint = this.wallet.masterFingerprint
       this.xpub = this.bip32.fromBase58(new ExtendedPublicKey(this.wallet.publicKey).toXpub()).toBase58()
       this.clearAddresses()
-
-      if ((await this.wallet.protocol.getIdentifier()) === MainProtocolSymbols.ETH) {
-        this.showChange = false
-      }
     }
   }
 
