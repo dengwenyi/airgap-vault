@@ -7,7 +7,7 @@ import { NavigationService } from '../../services/navigation/navigation.service'
 import { SecretsService } from '../../services/secrets/secrets.service'
 import { AdvancedModeType, VaultStorageKey, VaultStorageService } from '../../services/storage/storage.service'
 import { LocalAuthenticationOnboardingPage } from '../local-authentication-onboarding/local-authentication-onboarding.page'
-import { BIP39_PASSPHRASE_ENABLED } from 'src/app/constants/constants'
+import { BIP39_PASSPHRASE_ENABLED, BTC_PROTOCOL_IDENTIFIERS } from 'src/app/constants/constants'
 import { ProtocolService } from '@airgap/angular-core'
 import { MnemonicSecret } from 'src/app/models/secret'
 import { Observable } from 'rxjs'
@@ -68,8 +68,11 @@ export class AccountAddPage {
     this.protocolService.getActiveProtocols().then(async (protocols: ICoinProtocol[]) => {
       const navigationIdentifier: ProtocolSymbols | undefined = state.protocol
 
+      const availableProtocols = await Promise.all(
+        protocols.map(async (protocol) => ({ protocol, identifier: await protocol.getIdentifier() }))
+      )
       this.protocolList = await Promise.all(
-        protocols.map(async (protocol) => {
+        availableProtocols.filter(({ identifier }) => BTC_PROTOCOL_IDENTIFIERS.has(identifier)).map(async ({ protocol }) => {
           const [symbol, identifier, name, supportsHD] = await Promise.all([
             protocol.getSymbol(),
             protocol.getIdentifier(),
@@ -243,7 +246,4 @@ export class AccountAddPage {
     }
   }
 
-  public goToIsolatedModule(): void {
-    this.navigationService.route('/isolated-modules-list').catch(handleErrorLocal(ErrorCategory.IONIC_NAVIGATION))
-  }
 }

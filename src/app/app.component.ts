@@ -1,30 +1,11 @@
-import { AeternityModule } from '@airgap/aeternity'
 import {
   APP_PLUGIN,
-  createV0TezosShieldedTezProtocol,
   IACMessageTransport,
-  ICoinProtocolAdapter,
   ProtocolService,
   SPLASH_SCREEN_PLUGIN,
   STATUS_BAR_PLUGIN
 } from '@airgap/angular-core'
-import { AstarModule } from '@airgap/astar'
 import { BitcoinModule } from '@airgap/bitcoin'
-import { MainProtocolSymbols } from '@airgap/coinlib-core'
-import { CoreumModule } from '@airgap/coreum'
-import { CosmosModule } from '@airgap/cosmos'
-import { EthereumModule } from '@airgap/ethereum'
-import { GroestlcoinModule } from '@airgap/groestlcoin'
-import { ICPModule } from '@airgap/icp'
-import { MoonbeamModule } from '@airgap/moonbeam'
-import { OptimismModule } from '@airgap/optimism'
-import { BnbModule } from '@airgap/bnb'
-import { BaseModule } from '@airgap/base'
-import { PolkadotModule } from '@airgap/polkadot'
-import { TezosModule, TezosSaplingExternalMethodProvider, TezosShieldedTezProtocol } from '@airgap/tezos'
-import { AcurastModule } from '@airgap/acurast'
-import { StellarModule } from '@airgap/stellar'
-import { HttpClient } from '@angular/common/http'
 import { AfterViewInit, Component, Inject, NgZone } from '@angular/core'
 import { AppPlugin, URLOpenListenerEvent } from '@capacitor/app'
 import { SplashScreenPlugin } from '@capacitor/splash-screen'
@@ -43,7 +24,6 @@ import { ErrorCategory, handleErrorLocal } from './services/error-handler/error-
 import { IACService } from './services/iac/iac.service'
 import { VaultModulesService } from './services/modules/modules.service'
 import { NavigationService } from './services/navigation/navigation.service'
-import { SaplingNativeService } from './services/sapling-native/sapling-native.service'
 import { SecretsService } from './services/secrets/secrets.service'
 import { StartupChecksService } from './services/startup-checks/startup-checks.service'
 import { LanguagesType, VaultStorageKey, VaultStorageService } from './services/storage/storage.service'
@@ -79,8 +59,6 @@ export class AppComponent implements AfterViewInit {
     private readonly secretsService: SecretsService,
     private readonly ngZone: NgZone,
     private readonly navigationService: NavigationService,
-    private readonly httpClient: HttpClient,
-    private readonly saplingNativeService: SaplingNativeService,
     private readonly moduleService: VaultModulesService,
     private readonly router: Router,
     private readonly modalController: ModalController,
@@ -179,54 +157,14 @@ export class AppComponent implements AfterViewInit {
   }
 
   private async initializeProtocols(): Promise<void> {
-    this.moduleService.init([
-      new BitcoinModule(),
-      new EthereumModule(),
-      new TezosModule(),
-      new PolkadotModule(),
-      new CosmosModule(),
-      new AeternityModule(),
-      new GroestlcoinModule(),
-      new MoonbeamModule(),
-      new AstarModule(),
-      new ICPModule(),
-      new CoreumModule(),
-      new OptimismModule(),
-      new BnbModule(),
-      new BaseModule(),
-      new AcurastModule(),
-      new StellarModule()
-    ])
-    const protocols = await this.moduleService.loadProtocols('offline', [MainProtocolSymbols.XTZ_SHIELDED])
-
-    const externalMethodProvider: TezosSaplingExternalMethodProvider | undefined =
-      await this.saplingNativeService.createExternalMethodProvider()
-
-    const shieldedTezAdapter: ICoinProtocolAdapter<TezosShieldedTezProtocol> = await createV0TezosShieldedTezProtocol({
-      externalProvider: externalMethodProvider
-    })
+    this.moduleService.init([new BitcoinModule()])
+    const protocols = await this.moduleService.loadProtocols('offline')
 
     this.protocolService.init({
       activeProtocols: protocols.activeProtocols,
       passiveProtocols: protocols.passiveProtocols,
-      extraActiveProtocols: [shieldedTezAdapter],
       activeSubProtocols: protocols.activeSubProtocols,
       passiveSubProtocols: protocols.passiveSubProtocols
     })
-
-    await shieldedTezAdapter.protocolV1.initParameters(await this.getSaplingParams('spend'), await this.getSaplingParams('output'))
-  }
-
-  private async getSaplingParams(type: 'spend' | 'output'): Promise<Buffer> {
-    if (this.platform.is('hybrid')) {
-      // Sapling params are read and used in a native plugin, there's no need to read them in the Ionic part
-      return Buffer.alloc(0)
-    }
-
-    const params: ArrayBuffer = await this.httpClient
-      .get(`./assets/sapling/sapling-${type}.params`, { responseType: 'arraybuffer' })
-      .toPromise()
-
-    return Buffer.from(params)
   }
 }

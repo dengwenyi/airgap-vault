@@ -54,12 +54,11 @@ import CordovaSQLiteDriver from 'localforage-cordovasqlitedriver'
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import * as fromRoot from './app.reducers'
-import { CameraPreview, Environment, SaplingNative, SecurityUtils } from './capacitor-plugins/definitions'
+import { CameraPreview, Environment, SecurityUtils } from './capacitor-plugins/definitions'
 import {
   CAMERA_PREVIEW_PLUGIN,
   ENVIRONMENT_PLUGIN,
   FILE_PICKER_PLUGIN,
-  SAPLING_PLUGIN,
   SECURITY_UTILS_PLUGIN
 } from './capacitor-plugins/injection-tokens'
 import { appConfig } from './config/app-config'
@@ -88,7 +87,6 @@ import { Filesystem } from '@capacitor/filesystem'
 import { InstallationTypePageModule } from './pages/Installation-type/installation-type.module'
 import { OnboardingAdvancedModePageModule } from './pages/onboarding-advanced-mode/onboarding-advanced-mode.module'
 import { OnboardingWelcomePageModule } from './pages/onboarding-welcome/onboarding-welcome.module'
-import { IsolatedModulesOnboardingPageModule } from './pages/isolated-modules-onboarding/isolated-modules-onboarding.module'
 import { VaultModulesService } from './services/modules/modules.service'
 import { VaultEnvironmentService } from './services/environment/vault-environment.service'
 import { SocialRecoveryImportShareService } from './social-recovery-import-share/social-recovery-import-share.service'
@@ -129,7 +127,6 @@ export function createTranslateLoader(http: HttpClient): AirGapTranslateLoader {
     InstallationTypePageModule,
     OnboardingAdvancedModePageModule,
     OnboardingWelcomePageModule,
-    IsolatedModulesOnboardingPageModule,
     DistributionOnboardingPageModule,
     LocalAuthenticationOnboardingPageModule,
     AirGapAngularCoreModule.forRoot({
@@ -149,7 +146,6 @@ export function createTranslateLoader(http: HttpClient): AirGapTranslateLoader {
     { provide: CAMERA_PREVIEW_PLUGIN, useValue: CameraPreview },
     { provide: CLIPBOARD_PLUGIN, useValue: Clipboard },
     { provide: FILESYSTEM_PLUGIN, useValue: Filesystem },
-    { provide: SAPLING_PLUGIN, useValue: SaplingNative },
     { provide: SECURITY_UTILS_PLUGIN, useValue: SecurityUtils },
     { provide: SPLASH_SCREEN_PLUGIN, useValue: SplashScreen },
     { provide: STATUS_BAR_PLUGIN, useValue: StatusBar },

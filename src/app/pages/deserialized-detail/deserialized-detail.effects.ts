@@ -2,7 +2,6 @@ import {
   assertNever,
   flattenAirGapTxAddresses,
   IACContext,
-  ICoinProtocolAdapter,
   KeyPairService,
   ProtocolService,
   sumAirGapTxValues,
@@ -12,13 +11,11 @@ import {
   AirGapWallet,
   IAirGapTransaction,
   ICoinProtocol,
-  MainProtocolSymbols,
   ProtocolSymbols,
   SignedTransaction,
   UnsignedTransaction
 } from '@airgap/coinlib-core'
 import { IACMessageType, IACMessageDefinitionObjectV3, MessageSignRequest } from '@airgap/serializer'
-import { TezosCryptoClient, TezosSaplingProtocol } from '@airgap/tezos'
 import { Injectable } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { Action, Store } from '@ngrx/store'
@@ -217,18 +214,7 @@ export class DeserializedDetailEffects {
           ([_, request]: [AirGapWallet, IACMessageDefinitionObjectV3]): boolean => request.type === IACMessageType.TransactionSignRequest
         )
         .map(async ([wallet, request]: [AirGapWallet, IACMessageDefinitionObjectV3]): Promise<DeserializedUnsignedTransaction> => {
-          let details: IAirGapTransaction[]
-          if (await this.checkIfSaplingTransaction(request.payload as UnsignedTransaction, request.protocol)) {
-            details = await this.transactionService.getDetailsFromIACMessages([request], {
-              overrideProtocol: await this.getSaplingProtocol(),
-              data: {
-                knownViewingKeys: await this.secretsService.getKnownViewingKeys(),
-                transactionOwner: request.protocol
-              }
-            })
-          } else {
-            details = await this.transactionService.getDetailsFromIACMessages([request])
-          }
+          const details: IAirGapTransaction[] = await this.transactionService.getDetailsFromIACMessages([request])
 
           return {
             type: 'unsigned',
@@ -254,19 +240,13 @@ export class DeserializedDetailEffects {
         .map(async ([wallet, request]: [AirGapWallet, IACMessageDefinitionObjectV3]): Promise<DeserializedUnsignedMessage> => {
           const data: MessageSignRequest = request.payload as MessageSignRequest
 
-          let blake2bHash: string | undefined
-          if (request.protocol === MainProtocolSymbols.XTZ) {
-            const cryptoClient = new TezosCryptoClient()
-            blake2bHash = await cryptoClient.blake2bLedgerHash(data.message)
-          }
-
           return {
             type: 'unsigned',
             id: request.id,
             protocol: request.protocol,
             data,
             iacContext,
-            blake2bHash,
+            blake2bHash: undefined,
             wallet,
             originalProtocolIdentifier: request.protocol !== (await wallet.protocol.getSymbol()) ? request.protocol : undefined
           }
@@ -531,37 +511,6 @@ export class DeserializedDetailEffects {
       })
     )
     return signResponses
-  }
-
-  private async checkIfSaplingTransaction(transaction: UnsignedTransaction, protocolIdentifier: ProtocolSymbols): Promise<boolean> {
-    if (protocolIdentifier === MainProtocolSymbols.XTZ) {
-      try {
-        const saplingAdapter: ICoinProtocolAdapter<TezosSaplingProtocol> = await this.getSaplingProtocol()
-        const txDetails: IAirGapTransaction[] = await saplingAdapter.getTransactionDetails(transaction, {
-          transactionOwner: protocolIdentifier
-        })
-        const recipients: string[] = txDetails
-          .map((details) => details.to)
-          .reduce((flatten: string[], next: string[]) => flatten.concat(next), [])
-
-        // TODO: find better way to check if `transaction` is a Sapling transaction
-        return recipients.some((recipient: string) => recipient.startsWith('zet') || recipient.toLocaleLowerCase() === 'shielded pool')
-      } catch (error) {
-        console.error(error)
-        return false
-      }
-    }
-
-    return protocolIdentifier === MainProtocolSymbols.XTZ_SHIELDED
-  }
-
-  private async getSaplingProtocol(): Promise<ICoinProtocolAdapter<TezosSaplingProtocol>> {
-    const protocol: ICoinProtocol = await this.protocolService.getProtocol(MainProtocolSymbols.XTZ_SHIELDED)
-    if (!(protocol instanceof ICoinProtocolAdapter)) {
-      throw new Error('Unexpected Sapling protocol implementation')
-    }
-
-    return protocol as ICoinProtocolAdapter<TezosSaplingProtocol>
   }
 
   private async getChildDerivationPath(walletDerivationPath: string, accountDerivationPath?: string): Promise<string | undefined> {

@@ -103,10 +103,6 @@ export class TabSettingsPage implements OnInit {
     this.navigationService.route('/wordlist').catch(handleErrorLocal(ErrorCategory.IONIC_NAVIGATION))
   }
 
-  public async goToIsolatedModules() {
-    this.navigationService.route('/isolated-modules-list').catch(handleErrorLocal(ErrorCategory.IONIC_NAVIGATION))
-  }
-
   public goToVaultInteraction(): void {
     console.log('navigating to vault interaction')
     this.navigationService.route('/vault-interaction-settings').catch(handleErrorLocal(ErrorCategory.IONIC_NAVIGATION))

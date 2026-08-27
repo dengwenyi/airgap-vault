@@ -275,15 +275,6 @@ const routes: Routes = [
   {
     path: 'address-explorer',
     loadChildren: () => import('./pages/address-explorer/address-explorer.module').then((m) => m.AddressExplorerPageModule)
-  },
-  {
-    path: 'isolated-modules-list',
-    loadChildren: () => import('./pages/isolated-modules-list/isolated-modules-list.module').then((m) => m.IsolatedModulesListPageModule)
-  },
-  {
-    path: 'isolated-modules-details/:intention',
-    loadChildren: () =>
-      import('./pages/isolated-modules-details/isolated-modules-details.module').then((m) => m.IsolatedModulesDetailsPageModule)
   }
 ]
 

@@ -6,7 +6,6 @@ import {
   DeeplinkService,
   IACMessageTransport,
   IACMessageWrapper,
-  ProtocolService,
   RelayMessage,
   UiEventElementsService,
   UiEventService
@@ -22,9 +21,9 @@ import { SecretsService } from '../secrets/secrets.service'
 import * as bitcoinJS from 'bitcoinjs-lib'
 import { ModalController, Platform } from '@ionic/angular'
 import { SelectAccountPage } from 'src/app/pages/select-account/select-account.page'
-import { RawTypedEthereumTransaction } from '@airgap/ethereum/v0/types/transaction-ethereum'
 import { IACMessageType, IACMessageDefinitionObjectV3, MessageSignRequest } from '@airgap/serializer'
 import { BitcoinSegwitTransactionSignRequest } from '@airgap/bitcoin'
+import { isBitcoinProtocol } from 'src/app/constants/constants'
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +33,6 @@ export class IACService extends BaseIACService {
     public readonly uiEventService: UiEventService,
     public readonly uiEventElementsService: UiEventElementsService,
     public readonly deeplinkService: DeeplinkService,
-    private readonly protocolService: ProtocolService,
     protected readonly clipboard: ClipboardService,
     private readonly navigationService: NavigationService,
     private readonly secretsService: SecretsService,
@@ -66,7 +64,7 @@ export class IACService extends BaseIACService {
     const transactionInfos: SignTransactionInfo[] = (
       await Promise.all(
         signTransactionRequests.map(async (signTransactionRequest): Promise<SignTransactionInfo> => {
-          return this.findMatchingWallet(signTransactionRequest, messageWrapper.context)
+          return this.findMatchingWallet(signTransactionRequest)
         })
       )
     ).filter((signTransactionDetails) => signTransactionDetails.wallet !== undefined)
@@ -111,11 +109,23 @@ export class IACService extends BaseIACService {
   ): Promise<boolean> {
     const messageDefinitionObjects: IACMessageDefinitionObjectV3[] = messageWrapper.result
 
-    const transactionInfos: SignTransactionInfo[] = await Promise.all(
-      messageDefinitionObjects.map(async (messageDefinitionObject): Promise<SignTransactionInfo> => {
-        return this.findMatchingSignWallet(messageDefinitionObject, messageWrapper.context)
+    const transactionInfos: SignTransactionInfo[] = (
+      await Promise.all(
+        messageDefinitionObjects.map(async (messageDefinitionObject): Promise<SignTransactionInfo> => {
+          return this.findMatchingSignWallet(messageDefinitionObject)
+        })
+      )
+    ).filter((signTransactionDetails) => signTransactionDetails.wallet !== undefined)
+
+    if (transactionInfos.length === 0) {
+      this.uiEventService.showTranslatedAlert({
+        header: 'tab-wallets.no-secret_alert.title',
+        message: 'tab-wallets.no-secret_alert.text',
+        buttons: [{ text: 'tab-wallets.no-secret_alert.okay_label', role: 'cancel' }]
       })
-    )
+      return false
+    }
+
     this.navigationService
       .routeWithState('deserialized-detail', {
         transactionInfos: transactionInfos,
@@ -136,14 +146,11 @@ export class IACService extends BaseIACService {
     await this.secretsService.updateWallet(wallet)
   }
 
-  private async findMatchingWallet(
-    signTransactionRequest: IACMessageDefinitionObjectV3,
-    metadata: {
-      requestId?: string
-      derivationPath?: string
-      sourceFingerprint?: string
+  private async findMatchingWallet(signTransactionRequest: IACMessageDefinitionObjectV3) {
+    if (!isBitcoinProtocol(signTransactionRequest.protocol)) {
+      return { wallet: undefined, secret: undefined, signTransactionRequest }
     }
-  ) {
+
     const unsignedTransaction: UnsignedTransaction = signTransactionRequest.payload as UnsignedTransaction
 
     // Select wallet by public key and protocol identifier
@@ -214,39 +221,11 @@ export class IACService extends BaseIACService {
       }
     }
 
-    // ETH: MetaMask requests don't contain the public key information, we need to do the matching based on the sourceFingerprint
-    if (
-      !correctWallet &&
-      (signTransactionRequest.protocol === MainProtocolSymbols.ETH ||
-        signTransactionRequest.protocol === MainProtocolSymbols.OPTIMISM ||
-        signTransactionRequest.protocol === MainProtocolSymbols.BNB ||
-        signTransactionRequest.protocol === MainProtocolSymbols.BASE)
-    ) {
-      const transaction: RawTypedEthereumTransaction = unsignedTransaction.transaction
-
-      const fingerprint = transaction.masterFingerprint ?? metadata.sourceFingerprint
-      const derivationPath = transaction.derivationPath ?? metadata.derivationPath
-
-      correctWallet = await this.findMetaMaskWallet(fingerprint, signTransactionRequest.protocol, derivationPath)
-
-      if (correctWallet && !derivationPath.startsWith(correctWallet.derivationPath.slice(2) /* Remove leading "m/" */)) {
-        throw new Error('Derivation path of the request does not match the one of the selected wallet')
-      }
-
-      if (correctWallet && !unsignedTransaction.publicKey) {
-        unsignedTransaction.publicKey = correctWallet.publicKey // MetaMask txs don't include a public key, so we need to set it
-      }
-    }
-
     if (correctWallet) {
       await this.activateWallet(correctWallet)
     }
 
-    if (!correctWallet) {
-      correctWallet = await this.findBaseWallet(unsignedTransaction.publicKey, signTransactionRequest)
-    }
-
-    const secret = this.secretsService.findByPublicKey(correctWallet.publicKey)
+    const secret = correctWallet ? this.secretsService.findByPublicKey(correctWallet.publicKey) : undefined
 
     return {
       wallet: correctWallet,
@@ -255,14 +234,11 @@ export class IACService extends BaseIACService {
     }
   }
 
-  private async findMatchingSignWallet(
-    messageDefinitionObject: IACMessageDefinitionObjectV3,
-    metadata: {
-      requestId?: string
-      derivationPath?: string
-      sourceFingerprint?: string
+  private async findMatchingSignWallet(messageDefinitionObject: IACMessageDefinitionObjectV3) {
+    if (!isBitcoinProtocol(messageDefinitionObject.protocol)) {
+      return { wallet: undefined, secret: undefined, signTransactionRequest: messageDefinitionObject }
     }
-  ) {
+
     const messageSignRequest: MessageSignRequest = messageDefinitionObject.payload as MessageSignRequest
 
     let correctWallet = await this.secretsService.findWalletByPublicKeyAndProtocolIdentifier(
@@ -270,24 +246,11 @@ export class IACService extends BaseIACService {
       messageDefinitionObject.protocol
     )
 
-    // ETH: MetaMask requests don't contain the public key information, we need to do the matching based on the sourceFingerprint
-    if (!correctWallet && messageDefinitionObject.protocol === MainProtocolSymbols.ETH) {
-      correctWallet = await this.findMetaMaskWallet(metadata.sourceFingerprint, messageDefinitionObject.protocol, metadata.derivationPath)
-
-      if (correctWallet && !metadata.derivationPath.startsWith(correctWallet.derivationPath.slice(2) /* Remove leading "m/" */)) {
-        throw new Error('Derivation path of the request does not match the one of the selected wallet')
-      }
-    }
-
     if (correctWallet) {
       await this.activateWallet(correctWallet)
     }
 
-    if (!correctWallet) {
-      correctWallet = await this.findBaseWallet(messageSignRequest.publicKey, messageDefinitionObject)
-    }
-
-    const secret = this.secretsService.findByPublicKey(correctWallet.publicKey)
+    const secret = correctWallet ? this.secretsService.findByPublicKey(correctWallet.publicKey) : undefined
 
     return {
       wallet: correctWallet,
@@ -302,57 +265,4 @@ export class IACService extends BaseIACService {
     }
   }
 
-  private async findBaseWallet(
-    publicKey: string,
-    messageDefinitionObject: IACMessageDefinitionObjectV3
-  ): Promise<AirGapWallet | undefined> {
-    // If we can't find a wallet for a protocol, we will try to find the "base" wallet and then create a new
-    // wallet with the right protocol. This way we can sign all ERC20 transactions, but show the right amount
-    // and fee for all tokens we support.
-    let correctWallet: AirGapWallet | undefined
-
-    const baseWallet: AirGapWallet | undefined = await this.secretsService.findBaseWalletByPublicKeyAndProtocolIdentifier(
-      publicKey,
-      messageDefinitionObject.protocol
-    )
-
-    if (baseWallet) {
-      await this.activateWallet(baseWallet)
-      // If the protocol is not supported, use the base protocol for signing
-      const protocol = await this.protocolService.getProtocol(messageDefinitionObject.protocol)
-      try {
-        correctWallet = new AirGapWallet(
-          protocol,
-          baseWallet.publicKey,
-          baseWallet.isExtendedPublicKey,
-          baseWallet.derivationPath,
-          baseWallet.masterFingerprint,
-          baseWallet.status
-        )
-        correctWallet.addresses = baseWallet.addresses
-      } catch (e) {
-        if (e.message === 'PROTOCOL_NOT_SUPPORTED') {
-          correctWallet = baseWallet
-        }
-      }
-    }
-
-    return correctWallet
-  }
-
-  private async findMetaMaskWallet(
-    fingerprint: string,
-    protocol: MainProtocolSymbols,
-    derivationPath: string
-  ): Promise<AirGapWallet | undefined> {
-    let correctWallet: AirGapWallet | undefined
-
-    correctWallet = await this.secretsService.findWalletByXPubFingerprintDerivationPathAndProtocolIdentifier(
-      fingerprint,
-      protocol,
-      derivationPath
-    )
-
-    return correctWallet
-  }
 }
