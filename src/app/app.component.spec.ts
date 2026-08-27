@@ -26,7 +26,6 @@ import {
   createFilePickerSpy,
   createFilesystemSpy,
   createIsolatedModulesSpy,
-  createSaplingSpy,
   createSecurityUtilsSpy,
   createSplashScreenSpy,
   createStatusBarSpy,
@@ -35,8 +34,8 @@ import {
 
 import { UnitHelper } from './../../test-config/unit-test-helper'
 import { AppComponent } from './app.component'
-import { SaplingNativePlugin, SecurityUtilsPlugin } from './capacitor-plugins/definitions'
-import { FILE_PICKER_PLUGIN, SAPLING_PLUGIN, SECURITY_UTILS_PLUGIN } from './capacitor-plugins/injection-tokens'
+import { SecurityUtilsPlugin } from './capacitor-plugins/definitions'
+import { FILE_PICKER_PLUGIN, SECURITY_UTILS_PLUGIN } from './capacitor-plugins/injection-tokens'
 import { IACService } from './services/iac/iac.service'
 import { NavigationService } from './services/navigation/navigation.service'
 import { SecretsService } from './services/secrets/secrets.service'
@@ -47,7 +46,6 @@ import { SocialRecoveryImportShareService } from './social-recovery-import-share
 
 describe('AppComponent', () => {
   let appSpy: AppPlugin
-  let saplingSpy: SaplingNativePlugin
   let securityUtilsSpy: SecurityUtilsPlugin
   let statusBarSpy: StatusBarPlugin
   let splashScreenSpy: SplashScreenPlugin
@@ -63,7 +61,6 @@ describe('AppComponent', () => {
   let unitHelper: UnitHelper
   beforeEach(() => {
     appSpy = createAppSpy()
-    saplingSpy = createSaplingSpy()
     securityUtilsSpy = createSecurityUtilsSpy()
     statusBarSpy = createStatusBarSpy()
     splashScreenSpy = createSplashScreenSpy()
@@ -83,7 +80,6 @@ describe('AppComponent', () => {
         providers: [
           { provide: SecureStorageService, useClass: SecureStorageServiceMock },
           { provide: APP_PLUGIN, useValue: appSpy },
-          { provide: SAPLING_PLUGIN, useValue: saplingSpy },
           { provide: SECURITY_UTILS_PLUGIN, useValue: securityUtilsSpy },
           { provide: STATUS_BAR_PLUGIN, useValue: statusBarSpy },
           { provide: SPLASH_SCREEN_PLUGIN, useValue: splashScreenSpy },

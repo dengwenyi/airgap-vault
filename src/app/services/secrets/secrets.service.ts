@@ -628,16 +628,6 @@ export class SecretsService {
     return wallet
   }
 
-  public async getKnownViewingKeys(): Promise<string[]> {
-    const filtered: (string | undefined)[] = await Promise.all(
-      this.getWallets().map(async (wallet: AirGapWallet) => {
-        return (await wallet.protocol.getIdentifier()) === MainProtocolSymbols.XTZ_SHIELDED ? wallet.publicKey : undefined
-      })
-    )
-
-    return filtered.filter((publicKey: string | undefined) => publicKey !== undefined)
-  }
-
   public async showAlert(title: string, message: string): Promise<void> {
     const alert: HTMLIonAlertElement = await this.alertCtrl.create({
       header: title,

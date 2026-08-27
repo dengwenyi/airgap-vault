@@ -2,11 +2,6 @@
 # yarn lockfile v1
 
 
-"@airgap-community/iso-rootstock@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@airgap-community/iso-rootstock/-/iso-rootstock-1.0.0.tgz"
-  integrity sha512-jFgw0rLjkqzfu2eimJmmHjW+Ms9c+BcPQqjy8kL/vu0/t6ZH/wSe+bym20KV/GeG42EjuajlBd9lcQ7+FBfoTA==
-
 "@airgap/acurast@0.13.46":
   version "0.13.46"
   resolved "https://registry.npmjs.org/@airgap/acurast/-/acurast-0.13.46.tgz"
@@ -236,11 +231,6 @@
   version "0.0.9"
   resolved "https://registry.npmjs.org/@airgap/sapling-wasm/-/sapling-wasm-0.0.9.tgz"
   integrity sha512-rJjV7JIDxoardnZMgk4Uor5Z6OVsAE4I5uDlkGAb0tQ5NN0gmz9Bu2LKMPSCv7UqDpZowDX4BbMDuSqdO/IsbQ==
-
-"@airgap/sapling-wasm@0.0.7":
-  version "0.0.7"
-  resolved "https://registry.npmjs.org/@airgap/sapling-wasm/-/sapling-wasm-0.0.7.tgz"
-  integrity sha512-IMODbGPTBYKuO5ztiHX9C1PTlhqZvmVWv7m7zj5+VMcbBxrk4+jBAf7FYTH5l+IUsNMaHBOuh8Qq3A1b/pm7jQ==
 
 "@airgap/serializer@^0.13.46", "@airgap/serializer@0.13.46":
   version "0.13.46"
