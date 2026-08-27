@@ -1,18 +1,20 @@
-# AirGap Vault
+# AirGap Vault — Bitcoin-only
 
 <p align="left">
     <img src="./banner.png" />
 </p>
 
-> Self custody made simple and secure. Protect your crypto and store your private keys offline.
+> Self custody made simple and secure. Protect your Bitcoin keys offline.
+
+This branch is a Bitcoin-only build of AirGap Vault. It supports Bitcoin Legacy, SegWit and Taproot accounts. Non-Bitcoin signing requests are rejected, and dynamic protocol module installation is disabled.
 
 [AirGap](https://airgap.it) is a crypto wallet system that lets you secure cypto assets with one secret on an offline device. The AirGap Vault application is installed on a dedicated device that has no connection to any network, thus it is air gapped. The [AirGap Wallet](https://github.com/airgap-it/airgap-wallet) is installed on your everyday smartphone.
 
 ## Description
 
-AirGap Vault is responsible for secure key generation. Entropy from audio, video, touch and accelerometer are used together with the output of the hardware random number generator. The generated secret is saved in the secure enclave of the device, only accessible by biometric authentication. Accounts for multiple protcols can be created. Transactions are prepared by the AirGap Wallet and then transferred to the offline device via QR code, where it is signed and sent back to the Wallet using another QR code.
+AirGap Vault is responsible for secure key generation. Entropy from audio, video, touch and accelerometer are used together with the output of the hardware random number generator. The generated secret is saved in the secure enclave of the device, only accessible by biometric authentication. Bitcoin accounts can be created using Legacy, SegWit or Taproot address types. Transactions are prepared by the AirGap Wallet and then transferred to the offline device via QR code, where they are signed and sent back to the Wallet using another QR code.
 
-AirGap Vault is a hybrid application (using the same codebase for Android and iOS). Created using AirGap's protocol agnostic `airgap-coin-lib` library to interact with different protocols and our own secure storage implementation.
+AirGap Vault is a hybrid application using the same codebase for Android and iOS. This build uses the Bitcoin implementation from AirGap's `airgap-coin-lib` libraries together with AirGap's secure storage implementation.
 
 <p align="left">
     <img src="./devices.png" />
@@ -28,7 +30,8 @@ AirGap Vault is a hybrid application (using the same codebase for Android and iO
 - Secure secret generation with added entropy from audio, video, touch and device accelerometer
 - Secure storage using the secure enclave of the device, accessible only by biometric authenticaiton
 - Secure, one-way communication with AirGap Wallet over QR codes or URL-Schemes (app switching)
-- Create accounts for all supported currencies like Aeternity, Bitcoin, Ethereum, Tezos, Cosmos, Kusama, Polkadot, Groestlcoin etc.
+- Create Bitcoin Legacy, SegWit and Taproot accounts
+- Reject non-Bitcoin signing requests before any secret is accessed
 - Sign transactions offline without the secret ever leaving your device
 
 ## Security
